@@ -128,6 +128,16 @@ void EdgeRefinementWindow::refinement() {
   auto loc = std::upper_bound(accumulated_error.begin(), accumulated_error.end(), roulette);
   size_t index = std::distance(accumulated_error.begin(), loc);
 
+  for(int i = 1; i < edges.size(); i++) {
+    if(graph->keyframes.find(edges[i].begin) == graph->keyframes.end() || graph->keyframes.find(edges[i].end) == graph->keyframes.end()) {
+      continue;
+    }
+    if(edges[i].num_evaluations==0) {
+      index = i;
+      break;
+    }
+  }
+
   auto& edge = edges[index];
 
   auto v1 = graph->keyframes.find(edge.begin);
