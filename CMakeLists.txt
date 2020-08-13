@@ -146,4 +146,18 @@ target_link_libraries(interactive_slam
   imgui
 )
 
-file(COPY data DESTINATION .)
+install(
+  DIRECTORY
+    data
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+
+install(
+  TARGETS
+    interactive_slam
+    odometry2graph
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)

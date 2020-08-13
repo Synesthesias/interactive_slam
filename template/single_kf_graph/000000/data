@@ -1,0 +1,13 @@
+stamp 0 0
+estimate
+1 0 0 0
+0 1 0 0
+0 0 1 0
+0 0 0 1
+odom
+1 0 0 0
+0 1 0 0
+0 0 1 0
+0 0 0 1
+accum_distance -1
+id 0
