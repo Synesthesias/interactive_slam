@@ -16,11 +16,8 @@ configure_file (
   "${PROJECT_SOURCE_DIR}/include/hdl_graph_slam/version.h"
 )
 
-if("$ENV{ROS_DISTRO}" STRGREATER "melodic")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
-else()
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-endif()
+# add_definitions(-std=c++14)
+set(CMAKE_CXX_FLAGS "-std=c++14")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 find_package(catkin REQUIRED COMPONENTS roscpp ndt_omp hdl_graph_slam roslib)
@@ -149,4 +146,18 @@ target_link_libraries(interactive_slam
   imgui
 )
 
-file(COPY data DESTINATION .)
+install(
+  DIRECTORY
+    data
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+
+install(
+  TARGETS
+    interactive_slam
+    odometry2graph
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
